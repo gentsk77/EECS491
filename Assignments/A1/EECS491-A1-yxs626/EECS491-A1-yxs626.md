@@ -2,13 +2,48 @@
 ## EECS 491 Assignment 1
 Yue Shu
 
+- [Q1. Basic Probability](#q1-basic-probability)
+  - [1.1](#11)
+  - [1.2](#12)
+- [Q2. Independence](#q2-independence)
+  - [2.1](#21)
+  - [2.2](#22)
+- [Q3. Inspector Clouseau re-revisited](#q3-inspector-clouseau-re-revisited)
+  - [3.1](#31)
+  - [3.2](#32)
+  - [3.3](#33)
+  - [3.4](#34)
+    - [Original entry](#original-entry)
+    - [Modified entry](#modified-entry)
+    - [Trial One: smaller $p(k|\neg b, \neg m)$](#trial-one-smaller-pkneg-b-neg-m)
+    - [Trial Two: larger $p(k|b,\neg m)$](#trial-two-larger-pkbneg-m)
+    - [Trial Three: larger $p(k|b,m)$](#trial-three-larger-pkbm)
+    - [Trial Four: larger $p(k|\neg b,m)$](#trial-four-larger-pkneg-bm)
+    - [Conclusion](#conclusion)
+- [Q4. Biased views](#q4-biased-views)
+  - [4.1](#41)
+  - [4.2](#42)
+    - [Strong belief that the coin is biased](#strong-belief-that-the-coin-is-biased)
+    - [Strong belief that the coin is unbaised](#strong-belief-that-the-coin-is-unbaised)
+    - [No informative knowledge about the bias of the coin](#no-informative-knowledge-about-the-bias-of-the-coin)
+  - [4.3](#43)
+    - [Strong belief that the coin is biased](#strong-belief-that-the-coin-is-biased-1)
+    - [Strong belief that the coin is unbaised](#strong-belief-that-the-coin-is-unbaised-1)
+    - [No informative knowledge about the bias of the coin](#no-informative-knowledge-about-the-bias-of-the-coin-1)
+  - [4.4](#44)
+- [Q5. Inference using the Poisson distribution](#q5-inference-using-the-poisson-distribution)
+  - [5.1](#51)
+  - [5.2](#52)
+  - [5.3](#53)
+  - [5.4](#54)
+- [Q6. Exploration](#q6-exploration)
+  - [6.1](#61)
+  - [6.2](#62)
 # Q1. Basic Probability
 
 ## 1.1 
 **Prove
-\begin{equation}
-p(x,y|z) = p(x|z)p(y|x,z)
-\end{equation}**
+$$p(x,y|z) = p(x|z)p(y|x,z)$$**
 
 *Proof:* 
 $$ p(x,y|z) = \frac{p(x,y,z)}{p(z)} $$
@@ -17,15 +52,11 @@ $$ p(x,y|z) = \frac{p(y|x,z)p(x,z)}{p(z)} $$
 $$ \frac{p(x,z)}{p(z)} = p(x|z) $$
 $$ p(x,y|z) = p(y|x,z)p(x|z) $$
 Therefore, 
-\begin{equation}
-p(x,y|z) = p(x|z)p(y|x,z)
-\end{equation}
+$$p(x,y|z) = p(x|z)p(y|x,z)$$
 
 ## 1.2 
 **Prove**  
-\begin{equation}
-p(x|y,z) = \frac{p(y|x,z)p(x|z)}{p(y|z)}
-\end{equation}
+$$p(x|y,z) = \frac{p(y|x,z)p(x|z)}{p(y|z)}$$
 
 *Proof:* 
 $$ p(x|y,z) = \frac{p(x,y,z)}{p(y,z)} $$
@@ -104,6 +135,9 @@ pb_k = __pB_K__(pb, pk_bm, pk_bnm)
 pnb_k = __pB_K__(1 - pb, pk_nbm, pk_nbnm)
 print("The answer to problem 3.1, p(B|K) = <" + str(pb_k) + ", " + str(pnb_k) + ">.")
 ```
+
+    The answer to problem 3.1, p(B|K) = <0.7281553398058251, 0.27184466019417475>.
+    
 
   According to equation 1.2.8 in Example 1.3, the result of $p(B = murderer|knife~used)$ is rounded to 0.73, which conforms with the answer we just got above. Also, the normalized results of $p(b|K)$ and $p(\neg b|K)$ sum to 1 correctly.  
   Therefore, my function correctly computes the value in the example.
@@ -410,63 +444,24 @@ In this case, we shall see a flat distribution, meaning that all biases are equa
 
 
 ```python
-def __posterior_overlay__ (alpha, beta, theta):
+def __posterior_overlay__ (alpha, beta, theta, n):
     np.random.seed(491)
-    fig, ax = plt.subplots()
-    ## n = 0
-    n = 0
     Y = np.random.binomial(1, theta, n)
     a1 = alpha + Y.sum()
     a2 = beta + n - Y.sum()
     x = np.linspace(0, 1, 1000)
     y = scipy.stats.beta(a1, a2).pdf(x)
-    ax.plot(x, y, 'r')
-    ## n = 1
-    n = 1
-    Y = np.random.binomial(1, theta, n)
-    a1 = alpha + Y.sum()
-    a2 = beta + n - Y.sum()
-    x = np.linspace(0, 1, 1000)
-    y = scipy.stats.beta(a1, a2).pdf(x)
-    ax.plot(x, y, 'g');
-    ## n = 2
-    n = 2
-    Y = np.random.binomial(1, theta, n)
-    a1 = alpha + Y.sum()
-    a2 = beta + n - Y.sum()
-    x = np.linspace(0, 1, 1000)
-    y = scipy.stats.beta(a1, a2).pdf(x)
-    ax.plot(x, y, 'b');
-    ## n = 5
-    n = 5
-    Y = np.random.binomial(1, theta, n)
-    a1 = alpha + Y.sum()
-    a2 = beta + n - Y.sum()
-    x = np.linspace(0, 1, 1000)
-    y = scipy.stats.beta(a1, a2).pdf(x)
-    ax.plot(x, y, 'c');
-    ## n = 10
-    n = 10
-    Y = np.random.binomial(1, theta, n)
-    a1 = alpha + Y.sum()
-    a2 = beta + n - Y.sum()
-    x = np.linspace(0, 1, 1000)
-    y = scipy.stats.beta(a1, a2).pdf(x)
-    ax.plot(x, y, 'y');
-    ## n = 100
-    n = 100
-    Y = np.random.binomial(1, theta, n)
-    a1 = alpha + Y.sum()
-    a2 = beta + n - Y.sum()
-    x = np.linspace(0, 1, 1000)
-    y = scipy.stats.beta(a1, a2).pdf(x)
-    ax.plot(x, y, 'm');
-    plt.ylim(0, 20)
-    
-    ax.set_xlabel(r"$\theta$")
-    ax.set_title("Posterior distribution ({},{})".format(alpha, beta));
+    plt.plot(x, y, label = 'n = {}'.format(n))
+    plt.xlabel(r"$\theta$")
+    plt.title("Posterior distribution ({},{})".format(alpha, beta));
+    plt.legend()
 
-__posterior_overlay__(0.5, 0.5, 0.9)
+__posterior_overlay__(0.5, 0.5, 0.9, 0)
+__posterior_overlay__(0.5, 0.5, 0.9, 1)
+__posterior_overlay__(0.5, 0.5, 0.9, 2)
+__posterior_overlay__(0.5, 0.5, 0.9, 5)
+__posterior_overlay__(0.5, 0.5, 0.9, 10)
+__posterior_overlay__(0.5, 0.5, 0.9, 100)
 ```
 
 
@@ -478,7 +473,12 @@ In this case we are having a perfecly unbiased coin, which means $\theta = 0.5$
 
 
 ```python
-__posterior_overlay__(100, 100, 0.5)
+__posterior_overlay__(100, 100, 0.5, 0)
+__posterior_overlay__(100, 100, 0.5, 1)
+__posterior_overlay__(100, 100, 0.5, 2)
+__posterior_overlay__(100, 100, 0.5, 5)
+__posterior_overlay__(100, 100, 0.5, 10)
+__posterior_overlay__(100, 100, 0.5, 100)
 ```
 
 
@@ -491,7 +491,12 @@ __posterior_overlay__(100, 100, 0.5)
 
 
 ```python
-__posterior_overlay__(1, 1, 0.5)
+__posterior_overlay__(1, 1, 0.5, 0)
+__posterior_overlay__(1, 1, 0.5, 1)
+__posterior_overlay__(1, 1, 0.5, 2)
+__posterior_overlay__(1, 1, 0.5, 5)
+__posterior_overlay__(1, 1, 0.5, 10)
+__posterior_overlay__(1, 1, 0.5, 100)
 ```
 
 
@@ -511,7 +516,6 @@ __posterior_overlay__(1, 1, 0.5)
 ```python
 def __experiment__ (theta):
     np.random.seed(491)
-    fig, ax = plt.subplots()
     ## very biased
     n = 1000
     alpha = 0.5
@@ -521,7 +525,7 @@ def __experiment__ (theta):
     a2 = beta + n - Y.sum()
     x = np.linspace(0, 1, 1000)
     y = scipy.stats.beta(a1, a2).pdf(x)
-    ax.plot(x, y, 'r')
+    plt.plot(x, y, label = 'very biased')
     ## unbiased
     alpha = 100
     beta = 100
@@ -529,7 +533,7 @@ def __experiment__ (theta):
     a2 = beta + n - Y.sum()
     x = np.linspace(0, 1, 1000)
     y = scipy.stats.beta(a1, a2).pdf(x)
-    ax.plot(x, y, 'g')
+    plt.plot(x, y, label = 'unbiase at all')
     ## uninformative knowledge about prior
     alpha = 1
     beta = 1
@@ -537,10 +541,11 @@ def __experiment__ (theta):
     a2 = beta + n - Y.sum()
     x = np.linspace(0, 1, 1000)
     y = scipy.stats.beta(a1, a2).pdf(x)
-    ax.plot(x, y, 'b')
+    plt.plot(x, y, label = 'uninformative')
     
-    ax.set_xlabel(r"$\theta$")
-    ax.set_title("Posterior distribution theta = {}".format(theta));
+    plt.xlabel(r"$\theta$")
+    plt.title("Posterior distribution theta = {}".format(theta));
+    plt.legend()
 
 __experiment__(0.2)
 __experiment__(0.4)
@@ -552,19 +557,7 @@ __experiment__(0.8)
 ![png](output_67_0.png)
 
 
-
-![png](output_67_1.png)
-
-
-
-![png](output_67_2.png)
-
-
-
-![png](output_67_3.png)
-
-
-According to the plots above, we shall see that the biased view and the uninformative view always conforms with each other, and they are always more consistent with the data after $1000$ trials. If we decrease both the $\alpha$ and $\beta$ parameters in the unbiased view, it can also arrive at the same accurate estimate as shown below. However, in that case the belief that the coin is unbiased would not be strong enough :P. 
+According to the plots above, we shall see that the biased view and the uninformative view always conforms with each other that they even overlap, and they are always more consistent with the data after $1000$ trials. If we decrease both the $\alpha$ and $\beta$ parameters in the unbiased view, it can also arrive at the same accurate estimate as shown below. However, in that case the belief that the coin is unbiased would not be strong enough :P. 
 
 Therefore, we can conclude that it is not possible that each view will always arrive at an accurate estimate of $\theta$: the unbiased view would always fail. 
 
@@ -666,7 +659,7 @@ __posterior__(9, 1.5, 9, 3)
 **Discrete inference problem**
 
   In the Inspector Clouseau problem from Q3 we tried out discrete inference with three major variables `Maid`, `Knife`, and `Butler`.  
-  In this problem, I'd like to practice discrete inference with more complex variables which will require higher level of variable elimination skills. Lukilly, I took EECS391 with Prof. Lewicki, which allows me to do some basic variable reductions. Let's take a look at the problem first:
+  In this problem, I'd like to practice discrete inference with Bayes belief networks with more complex variables which will require higher level of variable elimination skills. Lukilly, I took EECS391 with Prof. Lewicki, which allows me to do some basic variable reductions. Let's take a look at the problem first:
   
   Huhu is a 2-year-old cat I raise in my apartment. A typical day of Huhu is sleeping, eating, and then sleeping again.  
   However, there was one day I got home and noticed that the door of my bedroom was open. Furthermore, Huhu did not greet me as I entered my apartment, whereas he has been doing so for the past 8 months. Only when Huhu knows he has done something I dislike while I'm not home will he hide somewhere when I come back. The door of my apartment was locked, so it was very unlikely that a burgerer broke in.  
@@ -757,6 +750,8 @@ print("The possibility that Huhu opened the door is, p(H|o) = <" + str(ph_o) + "
 ## 6.2
 **Continuous inference problem**
 
+We have covered quite a few conjugate priors in the previous part of this assignment, yet we haven't covered the normal distribution so far. The primary idea of this experiment is to play around with normal distribution and its conjugate prior where sampling is needed (although sampling is not performed in this experiment, I used arbitrary parameters instead). I will further improve this model in our future assignments (if plausible) with concrete sampling. 
+
   Vanderwal, a friend of mine, took care of Huhu for me over the past winter break when I wasn't home. To ensure that our cats were not trying to kill each other when he's not home, he installed a petcam in his living room to spy on the kittens. Vanderwal left the petcam on no matter he's home or not so I can also take a look at Huhu when I miss him.  
   One major function of the petcam is to spy on motions: when the kittens are chasing around, my iPhone app will send me a notification, so that I could know there was a fight going on. In order to model the probability of kitten fight, let's have two more **independent** variables based on my observation along with the probability I'd like to model as below:  
 
@@ -767,16 +762,15 @@ print("The possibility that Huhu opened the door is, p(H|o) = <" + str(ph_o) + "
 With the above varaibles, we shall model the posterior distribution of the probability that the kittens are having a fight using Bayes rule: 
 $$p(f|V,N) = \frac{p(V,N|f)p(f)}{p(V,N)} = \frac{p(V|f)p(N|f)p(f)}{p(V|f)p(N|f)p(f) + p(V|\neg f)p(N|\neg f)p(\neg f)}$$
 
-  I know that in a more rigorous setup, I should be using real life data and come up with prior using sample techniques. However, I failed to extract JSON log from the app and it's way too extra to construct the datasheet by hand.  
-  In this case, I will assume we are using a `Gaussian` (normal) prior:
+  I know that in a more rigorous setup, I should be using real life data and come up with prior using sampling techniques. However, I failed to extract JSON log from the app and it's way too extra to construct the datasheet by hand.  
+  In this case, I will assume we are using a `Gaussian` (normal) prior, and I will plot the pdf to demonstrate the parameter I will be using in the following part. 
 
 
 ```python
 from scipy.stats import norm
-
+import pandas as pd
 mu = 0
 sig = 1
-
 def __norm_pdf__ (mu, sig):
     x = np.linspace(-12, 12, 1000)
     y = norm.pdf(x, mu, 1 / sig)
@@ -789,43 +783,54 @@ __norm_pdf__(mu, sig)
 ```
 
 
-![png](output_91_0.png)
+![png](output_92_0.png)
 
 
-
-
-
-
-
+Suppose we want to know the probability that the kittens are fighting in the afternoon from $12:00PM$ to $18:00PM$, when the kittens have just waken up and tend to fight a lot, whereas as the day goes dark, they both become less aggressive. We can define $p(f)$ using a logistic function with predefined parameters. (Again I know I should do some sampling instead of using arbitrary value, let's assume we get the idea right!) 
 
 
 ```python
-np.random.seed(491)
-fig, ax = plt.subplots()
-theta = 0.5
-alpha = 5
-beta = 5
-## n = 0
-n = 0
-Y = np.random.binomial(1, theta, n)
-a1 = alpha + Y.sum()
-a2 = beta + n - Y.sum()
-x = np.linspace(0, 1, 1000)
-y = scipy.stats.beta(a1, a2).pdf(x)
-ax.plot(x, y, 'r')
+def __log__(x, beta, alpha):
+    return 1.0 / (1.0 + np.exp(np.dot(beta, x) + alpha))
+
+time = np.linspace(12, 18, 60)
+plt.plot(time, __log__(time, 0.65, -5))
 ```
 
 
 
 
-    [<matplotlib.lines.Line2D at 0x22766951fd0>]
+    [<matplotlib.lines.Line2D at 0x155408cf748>]
 
 
 
 
-![png](output_95_1.png)
+![png](output_94_1.png)
 
 
+Now we shall take a look at what we get by wrapping up the likelihood and prior we get. Suppose we want to take a look at the probability that the kittens are fighting at $14:00$ using the binomial function as we did in the previous problems:
 
 
+```python
+pk = __log__(14, 0.65, -5)
+mu = 0
+sig = 1
+n = 1
 
+def __post__ (mu, sig, pk):
+    ## hyperparameters for normal distribution
+    a1 = (sig * mu + sig * pk) / (sig + n * sig) 
+    a2 = sig + n * sig
+    ## 12:00 starts from the origin
+    x = np.linspace(0, 1, 1000)
+    y = norm(a1, 1/a2).pdf(x)
+    plt.plot(x,y)
+
+__post__(mu, sig, pk)
+```
+
+
+![png](output_96_0.png)
+
+
+The plot is supposed to converge yet it didn't, this is mostly because of the lack of sampling, which denotes unprecise $\alpha$ and $\beta$ values. However, the general idea that the probability is low is correct. I will further work on this problem in future assignments once we've covered more about sampling of priors. 

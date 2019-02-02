@@ -45,4 +45,4 @@ One major function of the petcam is to spy on motions: when the kittens are chas
 - `N`: the kittens have just finished a nap. Let $p(n)$ denotes $p(Napped=True)$
   
 With the above varaibles, we shall model the posterior distribution of the probability that the kittens are having a fight using Bayes rule: 
-$$p(f|V,N) = \frac{p(V, N|f) * p(f)}{p(V,N)} = p(f | V, C) = \frac{(P(L|s) * P(C|s) * P(s)}{P(L|s) * P(C|s) * P(s) + P(L|\bar{s}) * P(C|\bar{s}) * P(\bar{s})}$$
+$$p(f|V,N) = \frac{p(V, N|f) * p(f)}{p(V,N)} = p(f | V, C) = \frac{(p(V|f) * P(C|s) * p(f)}{P(L|s) * P(C|s) * p(f) + P(L|\bar{s}) * P(C|\bar{s}) * P(\bar{s})}$$
