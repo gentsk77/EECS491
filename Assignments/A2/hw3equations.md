@@ -18,13 +18,9 @@ $$
 $$
 = p(F = e)\sum_T p(S = no|T, F = e) \sum_B p(T|B) p(B)
 $$
-$$
-= p(F = e)\sum_T p(S = no|T, F = e) 
-$$
-
 So the final numerator we get is 
 $$
-p(F = e)\sum_T p(S = no|T, F = e)
+p(F = e)\sum_T p(S = no|T, F = e) \sum_B p(T|B) p(B)
 $$
 For the denominator, we do the same variable elimination as below: 
 $$
@@ -33,20 +29,17 @@ $$
 $$
 = \sum_F p(F) \sum_T p(S = no|T,F) \sum_B p(T|B) p(B)
 $$
-$$
-= \sum_F p(F) \sum_T p(S = no|T,F)
-$$
 So the final denominator we get is 
 $$
-\sum_F p(F) \sum_T p(S = no|T,F)
+\sum_F p(F) \sum_T p(S = no|T,F) \sum_B p(T|B) p(B)
 $$
 And the final expression for $p(f = empty | s = no)$ becomes
 $$
-\frac{p(F = e)\sum_T p(S = no|T, F = e)}{\sum_F p(F) \sum_T p(S = no|T,F)}
+\frac{p(F = e)\sum_T p(S = no|T, F = e) \sum_B p(T|B) p(B)}{\sum_F p(F) \sum_T p(S = no|T,F) \sum_B p(T|B) p(B)}
 $$
 And now we shall plug in the values we know: 
 $$
-\frac{p(F = e)\sum_T p(S = no|T, F = e)}{\sum_F p(F) \sum_T p(S = no|T,F)} 
+\frac{p(F = e)\sum_T p(S = no|T, F = e) \sum_B p(T|B) p(B)}{\sum_F p(F) \sum_T p(S = no|T,F) \sum_B p(T|B) p(B)} 
 $$
 $$
 = \frac{p(F = e) (p(S = fa| T = tr, F = e) + p(S = fa| T = fa, F = e))}{p(F = e)(p(S = fa|T = tr, F = e) + p(S = fa|T = fa, F = e)) + p(F = ne)(p(S = fa|T = tr, F = ne) + p(S = fa|T = fa, F = ne)) }
