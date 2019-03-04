@@ -183,6 +183,7 @@ dot
 - the transition from $Z_i$ to $Z$ represents the OR-gate logically, and is represented by the $\prod_{\normalsize j \in \textrm{pa}(x_i)}(1 - \mu_{ij})^{x_j}$ in the equation from previous parts (ignoring the leak node)
 - **the model does not allow the modeling of negative cause effects since $0 \leq \mu_{ij} \leq 1$ should always be true**
 - the transition from $Z$ to $Y$ is simply to substract the value of Z from 1  
+- the model does not provide continuous result 
 
 **sigmoid function**:
 - project the generalized linear model on the logistic function  
@@ -190,8 +191,9 @@ dot
 - the transition from $Zi$ to $Z$ is to sum all the $Z_i$s up, denoting a generalized linear model  
 - **the model allows the modeling of negative cause effects by setting negative weights on the generalized linear model**
 - the transition from $Z$ to $Y$ is through taking $Z$ as a parameter of the sigmoid function   
+- the model provides **continuous results between 0 and 1**
 
-So now that we have a more standardized strucutre of both function, we may come up with some of the conclusions. While both functions pertain the ability to decompose the influence of multiple causes into separate influences, the sigmoid function is more general than the noisy-OR function in that it allows the modeling of negative cause effects, where as the noisy-OR model does not. 
+So now that we have a more standardized strucutre of both function, we may come up with some of the conclusions. While both functions pertain the ability to decompose the influence of multiple causes into separate influences, the sigmoid function is more general than the noisy-OR function in that it allows the modeling of negative causal effects and provides continuous results covering from 0 to 1, whereas the noisy-OR model does not. 
 
 I don't quite get what a "unique function" is supposed to mean here. But if we're talking about the uniqueness of the function's output given distinct input parameters, neither of the functions shall show the uniqueness, since both function can get duplicate outputs due to their mathematical structures. It is rather simple to play with numerical combinations to get the same result. 
 
