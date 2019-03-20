@@ -23,3 +23,11 @@ $$ E(\mathbf{x}, \mathbf{y}) = h \sum_i x_i - \beta \sum_{i,j} x_i x_j - \eta \s
 And the final equation $E' - E$ that specifies the change in the energy equation when one variable $x_k$ changes state is:
 
 $$ E' - E = -2hx_k + 4\beta \sum_i x_i x_k + 2 \eta x_k y_k $$
+
+$$ 
+ E(\mathbf{x}, \mathbf{y}) = h \sum_i x_i + \beta \sum_{i, j} |x_i - x_j| + \eta \sum_i |x_i - y_i|
+$$
+
+$$
+E' - E = h(x_k' - x_k) + 2 \beta \sum_{j \in nbr(k)} (|x_k' - x_j| - |x_k - x_j|) + \eta (|x_k' - y_k| - |x_k - y_k|)
+$$
