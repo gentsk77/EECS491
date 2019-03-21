@@ -35,3 +35,41 @@ $$
 $$
 p(X) = \frac{1}{Z} \psi_{a,b,d} (a, b, d) \psi_{a, c}(a, c) \psi_{c, f}(c, f) \psi_{b, e}(b, e) \psi_{d, g}(d, g) \psi_{d, h}(d, h)
 $$
+
+
+leaves $\rightarrow$ root:
+
+$$
+\mu_{d \rightarrow f_2}(d) = 1
+$$
+$$
+\mu_{f_2 \rightarrow c}(d) = \sum_d f_2(d, c) 
+$$
+$$
+\mu_{c \rightarrow f_1}(c) = \mu_{f_2 \rightarrow c}(d)
+$$
+$$
+\mu_{b \rightarrow f_1}(b) = 1
+$$
+
+$$
+\mu_{f_1 \rightarrow a}(b, c) = \sum_{b, c} f_1(b, c) \mu_{b \rightarrow f_1}(b) \mu_{c \rightarrow f_1}(c)
+$$
+
+
+
+$$
+\mu_{a \rightarrow f_1}(a) = 1
+$$
+
+$$
+\mu_{f_1 \rightarrow c}(a, b) = \sum_{a, b} f_1(a, b, c) \mu_{b \rightarrow f_1}(b) \mu_{a \rightarrow f_1}(a)
+$$
+
+$$
+\mu_{c \rightarrow f_2}(c) = \mu_{f_1 \rightarrow c}(a, b)
+$$
+
+$$
+\mu_{f_2 \rightarrow d}(c) = \sum_c f_2(c, d) \mu_{c \rightarrow f_2}(c)
+$$
