@@ -31,3 +31,7 @@ $$
 $$
 E' - E = h(x_k' - x_k) + 2 \beta \sum_{j \in nbr(k)} (|x_k' - x_j| - |x_k - x_j|) + \eta (|x_k' - y_k| - |x_k - y_k|)
 $$
+
+$$
+p(X) = \frac{1}{Z} \psi_{a,b,d} (a, b, d) \psi_{a, c}(a, c) \psi_{c, f}(c, f) \psi_{b, e}(b, e) \psi_{d, g}(d, g) \psi_{d, h}(d, h)
+$$

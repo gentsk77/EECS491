@@ -1,0 +1,17 @@
+\documentclass[tikz]{standalone}
+
+\begin{document}
+\begin{tikzpicture}[thick, scale=1.2, transform shape]
+$ % latex/TikZ code
+% define styles
+\tikzstyle{every node} = [draw, circle, minimum size=7mm]
+\tikzset{>=latex}
+% add nodes
+\foreach \n/\x/\y in {a/1.5/3, b/2.5/3, c/1/2, d/2/2, e/3/2, f/1/1, g/2/1, h/3/1}
+    \node (\n) at (\x,\y) {\n};
+% draw links
+\foreach \from/\to in {a/c, a/d, b/d, b/e, c/f, d/g, d/h}
+    \draw [->] (\from) -- (\to);
+$
+\end{tikzpicture}
+\end{document}
