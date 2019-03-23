@@ -73,3 +73,19 @@ $$
 $$
 \mu_{f_2 \rightarrow d}(c) = \sum_c f_2(c, d) \mu_{c \rightarrow f_2}(c)
 $$
+
+$
+\mu_{}() = 
+$
+
+$
+\mu_{y_0 \rightarrow f_0}(y_0) = 1
+$
+
+$
+\mu_{f_0 \rightarrow x_0}(y_0) = \sum_{y_0} f_0(y_0, x_0) \mu_{y_0 \rightarrow f_0}(y_0)
+$
+
+$
+\mu_{x_0 \rightarrow f_{0,3}}(x_0) = 
+$
