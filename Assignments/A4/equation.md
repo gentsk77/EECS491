@@ -99,7 +99,7 @@ $$
 
 
 $$
-\Sigma - \lambda I = \begin{bmatrix} var(x) \space \space \space \space \Sigma_{x y} \\ \Sigma_{y x} \space \space \space \space var(y) \end{bmatrix} - \begin{bmatrix} \lambda \space \space 0 \\ 0 \space \space \lambda  \end{bmatrix} = \begin{bmatrix} var(x) - \lambda \space \space \space \space \space \space \space \space \space \space \Sigma_{xy} \\ \Sigma_{yx} \space \space \space \space \space \space \space \space \space \space var(y) - \lambda  \end{bmatrix}
+\Sigma - \lambda I = \begin{bmatrix} var(x) & \Sigma_{x y} \\ \Sigma_{y x} & var(y) \end{bmatrix} - \begin{bmatrix} \lambda \space \space 0 \\ 0 \space \space \lambda  \end{bmatrix} = \begin{bmatrix} var(x) - \lambda \space \space \space \space \space \space \space \space \space \space \Sigma_{xy} \\ \Sigma_{yx} \space \space \space \space \space \space \space \space \space \space var(y) - \lambda  \end{bmatrix}
 $$
 
 
@@ -128,6 +128,11 @@ $$
 
 
 
+Since $\mathbf{y}$ is obviously the linear combination of $\mathbf{x}$ and $\mathbf{z}$, the first thing that should come to our mind is that the mean, $\mathbf{\mu_y}$, should be defined as the linear combination of $\mathbf{\mu_x}$ and $\mathbf{\mu_z}$ as well:
+
+$$
+\mathbf{\mu_y} =  \mathbf{\mu_x} + \mathbf{\mu_z}
+$$
 
 
 
@@ -135,3 +140,30 @@ $$
 
 
 
+
+First of all, assuming joint normality of $(\mathbf{x}, \mathbf{z})$, then we should have, according to the linear properties of multivariate normal random vectors,
+
+$$
+\mathbf{y} = \mathbf{A} \mathbf{x} + \mathbf{B} \mathbf{z} = (\mathbf{A} \space \space \mathbf{B})  \begin{pmatrix}
+    \mathbf{x} \\  \mathbf{z}
+\end{pmatrix}
+$$
+
+where both $\mathbf{A}$ and $\mathbf{B}$ are identity matrix $\mathbf{I}$
+
+And thus 
+
+$$
+p(\mathbf{y}) = p(\mathbf{A} \mathbf{x} + \mathbf{B} \mathbf{z}) =  \mathcal{N} (\mathbf{A} \mathbf{x} + \mathbf{B} \mathbf{y} | (\mathbf{A} \space \space \space  \mathbf{B})  \begin{pmatrix} \mathbf{\mu_x} \\ \mathbf{\mu_z} \end{pmatrix}, (\mathbf{A} \space \space \space  \mathbf{B}) \mathbf{\Sigma_{x, z} \begin{pmatrix} \mathbf{A^T} \\ \mathbf{B^T} \end{pmatrix}}
+$$
+
+
+$$
+p(\mathbf{y}) = \mathcal{N} (\mathbf{A} \mathbf{x} + \mathbf{B} \mathbf{z} | \mathbf{A} \mathbf{\mu_x} + \mathbf{B} \mathbf{\mu_z}, \mathbf{A \Sigma_{xx} A^T} + \mathbf{B \Sigma_{xz}^T A^T} + \mathbf{A \Sigma_{xz} B^T} + \mathbf{B \Sigma_{zz} B^T})
+$$
+
+Then we shall plug in $\mathbf{A} = \mathbf{B} = \mathbf{I}$, and the final expression of $p(\mathbf{y})$ would be:
+
+$$
+p(\mathbf{y}) = \mathcal{N} ( \mathbf{x} + \mathbf{z} | \mathbf{\mu_x} + \mathbf{\mu_z}, \mathbf{ \Sigma_{xx} } + \mathbf{\Sigma_{xz}^T} + \mathbf{\Sigma_{xz} } + \mathbf{ \Sigma_{zz}})
+$$
